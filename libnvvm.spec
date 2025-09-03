@@ -45,7 +45,8 @@ cp -fr nvvm/lib64/* %{buildroot}%{_libdir}/
 %{_bindir}/cicc
 %{_datadir}/libdevice
 %{_includedir}/nvvm.h
-%{_libdir}
+%{_libdir}/libnvvm.so
+%{_libdir}/libnvvm.so.*
 
 %changelog
 * Wed Sep 03 2025 Simone Caronni <negativo17@gmail.com> - 1:13.0.39-1
