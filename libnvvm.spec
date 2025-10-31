@@ -8,7 +8,7 @@
 
 Name:           %(echo %real_name | tr '_' '-')
 Version:        13.0.88
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        CUDA NVVM
 License:        CUDA Toolkit
 URL:            https://developer.nvidia.com/cuda-toolkit
@@ -20,7 +20,11 @@ Source1:        https://developer.download.nvidia.com/compute/cuda/redist/%{real
 Conflicts:      %{name}-%{major_package_version} < %{?epoch:%{epoch}:}%{version}-%{release}
  
 %description
-LLVM IR for CUDA applications.
+NVVM IR is a compiler IR (intermediate representation) based on the LLVM IR.
+The NVVM IR is designed to represent GPU compute kernels (for example, CUDA
+kernels). High-level language front-ends, like the CUDA C compiler front-end,
+can generate NVVM IR. The NVVM compiler (which is based on LLVM) generates PTX
+code from NVVM IR.
 
 %package devel
 Summary:        Development package for %{name}
@@ -43,6 +47,8 @@ Files for development with %{name} and LLVM IR bytecode.
 install -p -m 0755 -D nvvm/bin/cicc %{buildroot}%{_bindir}/cicc
 install -p -m 0644 -D nvvm/include/nvvm.h %{buildroot}%{_includedir}/nvvm.h
 install -p -m 0644 -D nvvm/libdevice/libdevice.10.bc %{buildroot}%{_datadir}/libdevice/libdevice.10.bc
+# CMake expects the nvvm/libdevice in the same prefix as bin/cicc:
+ln -sf share %{buildroot}%{_prefix}/nvvm
 
 mkdir -p %{buildroot}%{_libdir}
 cp -fr nvvm/lib64/* %{buildroot}%{_libdir}/
@@ -56,8 +62,13 @@ cp -fr nvvm/lib64/* %{buildroot}%{_libdir}/
 %{_datadir}/libdevice
 %{_includedir}/nvvm.h
 %{_libdir}/libnvvm.so
+%{_prefix}/nvvm
 
 %changelog
+* Fri Oct 31 2025 Simone Caronni <negativo17@gmail.com> - 13.0.88-2
+- Update description.
+- Adjust to satisfy CMake detection of nvvm/libdevice.
+
 * Sun Oct 26 2025 Simone Caronni <negativo17@gmail.com> - 13.0.88-1
 - Update to 13.0.88.
 
