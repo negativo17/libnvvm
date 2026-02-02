@@ -7,8 +7,8 @@
 %global major_package_version 13-0
 
 Name:           %(echo %real_name | tr '_' '-')
-Version:        13.0.88
-Release:        2%{?dist}
+Version:        13.1.115
+Release:        1%{?dist}
 Summary:        CUDA NVVM
 License:        CUDA Toolkit
 URL:            https://developer.nvidia.com/cuda-toolkit
@@ -65,6 +65,9 @@ cp -fr nvvm/lib64/* %{buildroot}%{_libdir}/
 %{_prefix}/nvvm
 
 %changelog
+* Mon Feb 02 2026 Simone Caronni <negativo17@gmail.com> - 13.1.115-1
+- Update to 13.1.115.
+
 * Fri Oct 31 2025 Simone Caronni <negativo17@gmail.com> - 13.0.88-2
 - Update description.
 - Adjust to satisfy CMake detection of nvvm/libdevice.
