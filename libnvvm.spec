@@ -7,7 +7,7 @@
 %global major_package_version 13-1
 
 Name:           %(echo %real_name | tr '_' '-')
-Version:        13.3.73
+Version:        13.4.59
 Release:        1%{?dist}
 Summary:        CUDA NVVM
 License:        CUDA Toolkit
@@ -65,6 +65,9 @@ cp -fr nvvm/lib64/* %{buildroot}%{_libdir}/
 %{_prefix}/nvvm
 
 %changelog
+* Tue Sep 29 2026 Simone Caronni <negativo17@gmail.com> - 13.4.59-1
+- Update to 13.4.59.
+
 * Wed Jul 22 2026 Simone Caronni <negativo17@gmail.com> - 13.3.73-1
 - Update to 13.3.73.
 
